@@ -15,5 +15,7 @@ namespace finite_state_machine
         public bool HasVerifiedEmail => EmailVerifiedOn != null;
 
         public bool HasCompletedFinancialDetails => FinancialDetailsCompletedOn != null;
+
+        public override string ToString() => $"HasCompletedPersonalDetails: {HasCompletedPersonalDetails}\nHasVerifiedEmail: {HasVerifiedEmail}\nHasCompletedFinancialDetails: {HasCompletedFinancialDetails}";
     }
 }
