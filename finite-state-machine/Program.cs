@@ -1,5 +1,6 @@
 ﻿using System;
 using Stateless;
+using Shouldly;
 
 namespace finite_state_machine
 {
@@ -20,6 +21,8 @@ namespace finite_state_machine
 
             Console.WriteLine(state);
             Console.WriteLine(machine.State.Url);
+            Action invalidTransition = () => MakeTransition(machine, Events.EmailVerified, state);
+            invalidTransition.ShouldThrow<InvalidOperationException>();
 
             MakeTransition(machine, Events.PersonalDetailsSubmitted, state);
             MakeTransition(machine, Events.EmailVerified, state);
@@ -28,9 +31,11 @@ namespace finite_state_machine
 
         private static void MakeTransition(StateMachine<Page, Events> machine, Events trigger, State state)
         {
+            Console.WriteLine($"Firing {trigger}...");
             machine.Fire(trigger);
             Console.WriteLine(state);
             Console.WriteLine(machine.State.Url);
+            Console.WriteLine();
         }
 
         private static StateMachine<Page, Events> CreateStateMachine(State state)
