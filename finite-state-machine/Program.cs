@@ -1,4 +1,7 @@
 ﻿using System;
+using Finite;
+using finite_state_machine.workflow;
+using Shouldly;
 
 namespace finite_state_machine
 {
@@ -7,40 +10,53 @@ namespace finite_state_machine
         static void Main(string[] args)
         {
             var state = new State();
+            var machine = CreateStateMachine(state);
             Console.WriteLine(state);
-            Console.WriteLine(GetPage(state));
+            Console.WriteLine(GetPage(machine));
+            
+            TestTransition<EmailVerificationStep>(s => s.PersonalDetailsCompletedOn = DateTime.Now, state, machine);
 
-            state.PersonalDetailsCompletedOn = DateTime.Now;
-            Console.WriteLine(state);
-            Console.WriteLine(GetPage(state));
+            TestTransition<FinancialDetailsStep>(s => s.EmailVerifiedOn = DateTime.Now, state, machine);
 
-            state.EmailVerifiedOn = DateTime.Now;
-            Console.WriteLine(state);
-            Console.WriteLine(GetPage(state));
-
-            state.FinancialDetailsCompletedOn = DateTime.Now;
-            Console.WriteLine(state);
-            Console.WriteLine(GetPage(state));
+            TestTransition<RegistrationCompleted>(s => s.FinancialDetailsCompletedOn = DateTime.Now, state, machine);
         }
 
-        private static string GetPage(State state)
+        private static void TestTransition<TStep>(Action<State> mutator, State state, Finite.StateMachine<State> machine)
+            where TStep:Finite.State<State>
         {
-            if (!state.HasCompletedPersonalDetails)
-            {
-                return "/personal-details";
+            Action emailVerificationTransition = () => machine.TransitionTo<TStep>();
+            emailVerificationTransition.ShouldThrow<Finite.InvalidTransitionException>();
+            mutator(state);
+            emailVerificationTransition.ShouldNotThrow();
+            Console.WriteLine(state);
+            Console.WriteLine(GetPage(machine));
+        }
+
+        private static Finite.StateMachine<State> CreateStateMachine(State state)
+        {
+            var allStates = new Finite.State<State>[]{
+                new PersonalDetailsStep(),
+                new EmailVerificationStep(),
+                new FinancialDetailsStep(),
+                new RegistrationCompleted()
+            };
+
+            var machine = new Finite.StateMachine<State>(
+                new Finite.StateProviders.ManualStateProvider<State>(allStates),
+                state);
+
+            machine.ResetTo<PersonalDetailsStep>();
+
+            return machine;
+        }
+
+        private static string GetPage(StateMachine<State> machine)
+        {
+            if(machine.CurrentState is IUrlProvider urlProvider){
+                return urlProvider.Url;
             }
 
-            if (!state.HasVerifiedEmail)
-            {
-                return "/verify-email";
-            }
-
-            if (!state.HasCompletedFinancialDetails)
-            {
-                return "/financial-details";
-            }
-
-            return "/success";
+            throw new ArgumentException();
         }
     }
 }
