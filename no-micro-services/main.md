@@ -2,44 +2,50 @@
 % Tomas Urbonaitis
 % 2022-07-25
 
-# About me
+## About me
 * 15+ years in the industry
 * Mostly dotnet (but not anymore)
 * Mostly backend distributed systems
+* Microservices since 2012
 
-# What are microservices? 
+## TLDR
+* Are they bad? 
+* Should I do them or not? 
+* `NoMicroservices` like `NoSql`
+
+## What are microservices? 
 According to wikipedia:
 
 > A microservice architecture – a variant of the SOA (service-oriented architecture) structural style – arranges an application as a collection of loosely-coupled services. In a microservices architecture, services are fine-grained and the protocols are lightweight.
 
-# Monolith architecture
-TBD
+## Monolith architecture
+![monolith](monolith.png)
 
-# Microservice Architecture
-TBD
+## Microservice Architecture
+![microservices](microservices.png)
 
-# The lure
+## The lure
 * Trendy! Cool!
 * Uber/Google/Facebook and erveryone else does microservices!
 
-# The advantages
+## The advantages
 * Fleixibility in technology/language choice
 * Clear, explicit boundaries between components
 * Small deployable units (scalability, fault tollerance)
 
-# The Dark Side
+## The Dark Side
 * Complex system topology
 * (highly) distributed system debugging
 * More complex operations story
 * Defining the service boundaries correctly is hard
 
-# The Dark Side (vol 2)
+## The Dark Side (vol 2)
 * Local development is more complicated
 * Testing is more complicated
 * Much harder to refactor code
 * Dependency management
 
-# The Dark Side (vol 3)
+## The Dark Side (vol 3)
 * Less tooling maturity
 * More IPC == decreased performance
 * You get a whole new set of problems that monoliths just don't have to solve:
@@ -47,7 +53,7 @@ TBD
     * versioning
     * inter service authN and authZ
 
-# What to do?
+## What to do?
 * Start with a well structured monolith
 * Carve out separate services when:
     * Domain is well understood
@@ -57,9 +63,9 @@ TBD
     * You need to use different technologies/languages
 * Some areas can be deployed as separate service from the very start (i.e. authentication)
 
-# In summary
+## In summary
 * Any engineering solution is a compromise
 * Choosing the correct solution has to take into account the context (and not just the technical context)
 * It'll probably get worse before it gets better
 
-# Thank you! 
+## Thank you! 
