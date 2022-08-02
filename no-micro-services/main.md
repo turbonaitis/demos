@@ -29,29 +29,30 @@ According to wikipedia:
 * Uber/Google/Facebook and erveryone else does microservices!
 
 ## The advantages
-* Fleixibility in technology/language choice
+* Flexibility in technology/language choice
 * Clear, explicit boundaries between components
 * Small deployable units (scalability, fault tollerance)
+* enables large change volumes (organisational scalability)
 
 ## The Dark Side
 * Complex system topology
 * (highly) distributed system debugging
 * More complex operations story
-* Defining the service boundaries correctly is hard
+* Local development is more complicated
 
 ## The Dark Side (vol 2)
-* Local development is more complicated
 * Testing is more complicated
 * Much harder to refactor code
 * Dependency management
+* Less tooling maturity
 
 ## The Dark Side (vol 3)
-* Less tooling maturity
 * More IPC == decreased performance
 * You get a whole new set of problems that monoliths just don't have to solve:
     * service discovery
     * versioning
     * inter service authN and authZ
+* all the above get harder with scale (product, organisational)
 
 ## What to do?
 * Start with a well structured monolith
