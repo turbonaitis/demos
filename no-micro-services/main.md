@@ -22,10 +22,10 @@ According to wikipedia:
 ![exhibit 1](monolith.png)
 
 ## Exhibit 2
-![exhibit 2](microservices.png)
+![exhibit 2](not-microservice.png)
 
 ## Exhibit 3
-![exhibit 3](not-microservice.png)
+![exhibit 3](microservices.png)
 
 ## The lure
 * Trendy! Cool!
