@@ -73,3 +73,8 @@ According to wikipedia:
 * It'll probably get worse before it gets better
 
 ## Thank you! 
+https://urbonaitis.lt
+
+http://linkedin.com/in/tomasurbonaitis/
+
+https://github.com/turbonaitis
