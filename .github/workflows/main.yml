@@ -27,9 +27,9 @@ jobs:
       - uses: docker://pandoc/core:latest
         with:
           args: ./no-micro-services/main.md -o main.html -s -t revealjs
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v3
         with:
           name: presentation
           path: |
             main.html
-            images/
+            ./no-micro-services/images
