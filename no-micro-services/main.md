@@ -19,13 +19,13 @@ According to wikipedia:
 > A microservice architecture – a variant of the SOA (service-oriented architecture) structural style – arranges an application as a collection of loosely-coupled services. In a microservices architecture, services are fine-grained and the protocols are lightweight.
 
 ## Exhibit 1
-![exhibit 1](monolith.png)
+![exhibit 1](images/monolith.png)
 
 ## Exhibit 2
-![exhibit 2](not-microservice.png)
+![exhibit 2](images/not-microservice.png)
 
 ## Exhibit 3
-![exhibit 3](microservices.png)
+![exhibit 3](images/microservices.png)
 
 ## The lure
 * Trendy! Cool!
