@@ -10,6 +10,7 @@ All the content in this presentation is my own and does not represent the positi
 * Mostly dotnet (but not anymore :( )
 * Mostly backend distributed systems
 * Microservices since 2012
+
 ::: notes
 
 Started using microservices when they're still being called SOA.
@@ -88,6 +89,7 @@ Not all the complexity captured here
 
 ## Exhibit 2
 ![exhibit 2](images/not-microservice.png)
+
 ::: notes
 One could argue, but in general this is a microservice antipattern. 
 
@@ -98,6 +100,7 @@ If anyone has successfully scaled such a solution - please talk to me after the 
 
 ## Exhibit 3
 ![exhibit 3](images/monolith.png)
+
 ::: notes
 There's no trick here - it's just an old monolith
 :::
