@@ -77,6 +77,7 @@ Languages:
 ![exhibit 1](images/microservices.png)
 
 ::: notes
+
 So, as some people are already familiar with microservices, this will be easy :) 
 
 Who here thinks this is microservices?
@@ -85,32 +86,38 @@ Not all the complexity captured here
 - What fronts laod balanced microservices?
 - How are they discovered?
 - Local vs regional vs global
+
 :::
 
 ## Exhibit 2
 ![exhibit 2](images/not-microservice.png)
 
 ::: notes
+
 One could argue, but in general this is a microservice antipattern. 
 
 There's no defined contract if you integrate via DB.
 
 If anyone has successfully scaled such a solution - please talk to me after the presentation.
+
 :::
 
 ## Exhibit 3
 ![exhibit 3](images/monolith.png)
 
 ::: notes
+
 There's no trick here - it's just an old monolith
+
 :::
 
 ## The lure
 * Trendy! Cool!
 * FAANG and everyone else does microservices!
-* Solves some actual issues
+* Sometimes (!) solve some actual problems
 
 ::: notes
+
 So why do people chose to use microservices in the first place?
 
 I was one of them! Let me tell you a story. I just left my previous job and was invited by a few ex-colleagues to join their greenfield startup. They've just raised seed capital for their idea and we now had to create a working product in half a year. We knew the market opportunity was there and were expecting immediate exponential growth. We were really familiar with microservices - the previous company we all worked at used them very successfully. Given the above, we decided to create a microservice based system from the beginning. Was that the right decision?
@@ -120,13 +127,28 @@ NO!
 I'd say a lot of people do this because they're trendy and because FAANG companies use them (well, to be clear, no one knows what apple does, as they're so secretive :) ) 
 
 i'm not saying it's everyone - some people are actually adressing some genuine needs by using microservices.
+
 :::
 
 ## The advantages
-* Flexibility in technology/language choice
-* Clear, explicit boundaries between components
-* Small deployable units (scalability, fault tolerance)
 * Enables large change volumes (organisational scalability)
+* Clear, explicit boundaries between components
+* Flexibility in technology/language choice
+* Small deployable units (scalability, fault tolerance)
+
+::: notes
+
+Let's be optimists, let's look at the bright side of microservices first.
+
+The biggest problem they're solving is not really tecnical, but organisational. When you have 100s or 1000s of developers and a monolith, what happens? 
+
+You can also create clear and exlicit boundaries between components - there's clear data ownership, clear contracts and there have to be intentional changes.
+
+If you want/need to use different languages/technologies (like dotnet and java) - monolith no longer works and so you have to go the microservice route. It also allows you to experiment with new technologies more freely, by writing a small new service in a new language.
+
+The ability to deploy them individually of course brings benefits too - you can scale differently and if things go wrong, the blast radius is smaller. But this is a good segway onto our next section...
+
+:::
 
 ## The Dark Side
 * Complex system topology
