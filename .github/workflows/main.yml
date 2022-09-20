@@ -15,6 +15,22 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  create_presentation_pptx:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: docker://pandoc/core:latest
+        with:
+          args: ./no-micro-services/main.md -o ./no-micro-services/no-micro-services.pptx -s -t pptx
+      - uses: actions/upload-artifact@v3
+        with:
+          name: presentation-pptx
+          path: |
+            ./no-micro-services/no-micro-services.pptx
   # This workflow contains a single job called "build"
   create_presentation:
     # The type of runner that the job will run on
