@@ -32,12 +32,12 @@ According to wikipedia:
 
 ## The lure
 * Trendy! Cool!
-* Uber/Google/Facebook and erveryone else does microservices!
+* Uber/Google/Facebook and everyone else does microservices!
 
 ## The advantages
 * Flexibility in technology/language choice
 * Clear, explicit boundaries between components
-* Small deployable units (scalability, fault tollerance)
+* Small deployable units (scalability, fault tolerance)
 * Enables large change volumes (organisational scalability)
 
 ## The Dark Side
