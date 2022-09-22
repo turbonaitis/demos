@@ -153,14 +153,39 @@ The ability to deploy them individually of course brings benefits too - you can 
 ## The Dark Side
 * Complex system topology
 * (highly) distributed system debugging
+* Testing is more nuanced
 * More complex operations story
-* Local development is more complicated
+
+::: notes
+
+Even with moderate number of services, the system topology becomes complex. Which services depend on each other? Which are involved in what execution paths? Yes, there are tools to help answer these questions, but this is a problem monoliths simpy don't have.
+
+This becomes a much bigger issue if the system doesn't behave as it should and you need to debug. Multiple services, potentially written using different technologies - the requirements on the observability stack suddenly become much higher.
+
+So what do we do if we don't want to debug? Well, ideally we test our code :) 
+The testing story becomes interesting. On one hand, your changes hopefully only touch only a service or two, so there's less to test, but when it comes to the system as a whole - how do you test that? Also, when in a single user journey, service boundaries are crossed multiple times, this expands the number of things that can fail - there are contract mismatches, degraded behavior of upstream and downstream dependencies etc to take into account. 
+
+And observability is not the only operational aspect that becomes complicated - all operations are more difficult. In a monolith, all your system (except for the storage) is deployed in almost one go, there's much less need to think about ordering, backwards or forwards compatibility etc. Not any more. As there are more moving pieces, there are more things to be configured and the configuration is more dynamic.
+
+:::
 
 ## The Dark Side (vol 2)
-* Testing is more complicated
+* Local development is more complicated
 * Much harder to refactor code
-* Dependency management
 * Less tooling maturity
+* Dependency management
+
+::: notes
+
+While this applies to most big systems, even a reasonably small microservice system is more complicated when it comes to local development - do you build and deploy everything locally? That's a lot of building and deploying. Do you build and deploy only some parts? How do you manage the dependencies then? Do you connect to some shared environment? What happens if it breaks? Do you mock your dependencies? 
+
+All systems evolve and that means refactoring. Let's say you want to rename a method. Or a field. In a monolith, you open the IDE, do the changes you want, build/test your code, commit and deploy - and you're done. If that name is exposed as part of your microservice API - you can't (or more precisely - it's a long and involved process). What about adding a parameter? Of course, but you need to take care of forwards and backwards compatibility first. And we haven't even gotten into different technologies, which means that tooling support is just not there.
+
+And it's not just the refactoring - tooling around microservices is much less mature than around monoliths (although it's getting better in recent years). And you need more tooling :)
+
+Then comes dependency management. We've already touched upon the fact that it may be hard to know what services are calling you. Why is that important? Imagine you want to change the behaviour of your service - you need to let your callers know. Or say you need a new method exposed by another service. You did all the negotiations and prioritetizations and your feature request has been implemented. Has it been deployed yet? Do you wait for it to be deployed? Great! Now it's deployed. You deploy your changes, only to discover after a week that your partner team rolled back their service to the previous version. Without the method that your service is calling. Nice.
+
+:::
 
 ## The Dark Side (vol 3)
 * More IPC == decreased performance
@@ -170,6 +195,16 @@ The ability to deploy them individually of course brings benefits too - you can 
     * inter service authN and authZ
 * all the above get harder with scale (product, organisational)
 
+::: notes
+
+If we have more interconnected components that means more IPC and regardless how fast your network is how well your collocation is working - IPC is slower than a method call within the same process. If you've messed up some part of your system design - it's MUCH slower. 
+
+And there are other problems - how you discover your services? DNS? What about DNS caching? You either need to be super diligent with backwards and forwards compatibility, or get into the versioning game with it's own set of issues. You should do inter service authentication and authorization, if you're running a service mesh - but that brings even mroe tools into the picture. Tools that your teams needs to learn how to use and tools that are not perfect.
+
+And if the company hasn't sunk under all these problems, if you've created a successful product and are growing - congratulations, most of the problems will get more complicated, eventually requiering dedicated teams to own them. 
+
+:::
+
 ## What to do?
 * Start with a well structured monolith
 * Carve out separate services when:
@@ -177,7 +212,20 @@ The ability to deploy them individually of course brings benefits too - you can 
     * You have people who have the expertise needed to develop and operate microservices
     * You are ready to invest in devops and tooling
     * You will benefit from the advantages
-* Some areas can be deployed as separate service from the very start (i.e. authentication)
+
+::: notes
+
+So what do we do? Is it all doom and gloom? Should you stay away from microservices? 
+
+Well, as always, it depends - on what stage of development your product is in (POC, first live version, mature old system, deprecated system), on the size of the company, the collective expertise that's present in the company etc.
+
+If you're just starting out - KISS and start with a monolith. Quite likely time to market is more valuable than compelx architecture. 
+
+Start thinking of microservices when you know the domain well, you have people (or at least can hire them) who have experience developing and operating microservices. You're ready to invest in devops practices and tooling. 
+
+Most importantly though - when moving to microservices addresses a need, not a wish. 
+
+:::
 
 ## In summary
 * Any engineering solution is a compromise
