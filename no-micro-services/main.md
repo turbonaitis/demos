@@ -217,7 +217,7 @@ And if the company hasn't sunk under all these problems, if you've created a suc
 
 So what do we do? Is it all doom and gloom? Should you stay away from microservices? 
 
-Well, as always, it depends - on what stage of development your product is in (POC, first live version, mature old system, deprecated system), on the size of the company, the collective expertise that's present in the company etc.
+Well, as I've said in the very beginning, it depends - on what stage of development your product is in (POC, first live version, mature old system, deprecated system), on the size of the company, the collective expertise that's present in the company etc.
 
 If you're just starting out - KISS and start with a monolith. Quite likely time to market is more valuable than compelx architecture. 
 
